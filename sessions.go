@@ -20,16 +20,18 @@ type CookieOptions struct {
 	Path              string
 	MaxAge            int
 	Secure            bool
+	SameSite          http.SameSite
 }
 
-func NewCookieStore(name string, cookieOptions CookieOptions) {
+func NewCookieStore(name string, c CookieOptions) {
 	if cookies[name] == nil {
-		cookies[name] = sessions.NewCookieStore(cookieOptions.AuthenticationKey, cookieOptions.EncryptionKey)
+		cookies[name] = sessions.NewCookieStore(c.AuthenticationKey, c.EncryptionKey)
 		cookies[name].Options = &sessions.Options{
-			Domain: cookieOptions.Domain,
-			Path:   cookieOptions.Path,
-			MaxAge: cookieOptions.MaxAge,
-			Secure: cookieOptions.Secure,
+			Domain:   c.Domain,
+			Path:     c.Path,
+			MaxAge:   c.MaxAge,
+			Secure:   c.Secure,
+			SameSite: c.SameSite,
 		}
 	}
 }
