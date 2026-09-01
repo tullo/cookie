@@ -2,7 +2,7 @@ module github.com/tullo/cookie
 
 go 1.23
 
-toolchain go1.23.4
+toolchain go1.27.1
 
 require github.com/gorilla/sessions v1.4.0
 
